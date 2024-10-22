@@ -52,6 +52,5 @@ export function Put(path: string){
     }
 }
 
-export function getRouter() {
-    return router;
-}
+export {router};
+

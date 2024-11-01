@@ -1,10 +1,10 @@
 import { Request, Response, Router } from 'express';
 import 'reflect-metadata';
 import { GeneralException, ErroNaoTratado } from 'projeto_erros_padroes';
-import { createPathSwagger, headerInterface} from "./swaggerPaths"
+import { createPathSwagger, headerInterface, responseInterface} from "./swaggerPaths"
 
 interface dadosRotas{
-    path: string, headers?: headerInterface[],  requestBody?: any, response?:any
+    path: string, headers?: headerInterface[],  requestBody?: any, response?:responseInterface[]
 }
 const router = Router();
 const callMethodClass = (target: any, propertyKey: string, req: Request, res: Response)=> {

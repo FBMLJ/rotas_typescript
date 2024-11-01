@@ -1,7 +1,11 @@
 import { Request, Response, Router } from 'express';
 import 'reflect-metadata';
 import { GeneralException, ErroNaoTratado } from 'projeto_erros_padroes';
+import { createPathSwagger, headerInterface} from "./swaggerPaths"
 
+interface dadosRotas{
+    path: string, headers?: headerInterface[],  requestBody?: any, response?:any
+}
 const router = Router();
 const callMethodClass = (target: any, propertyKey: string, req: Request, res: Response)=> {
     const instance = new target.constructor();
@@ -20,33 +24,37 @@ const callMethodClass = (target: any, propertyKey: string, req: Request, res: Re
 }
 
 
-export function Get(path: string) {
+export function Get(dados: dadosRotas) {
     return function(target: any, propertyKey: string) {  
-        router.get(path, (req: Request, res: Response) => {
+        createPathSwagger(dados.path,"get",dados.headers,dados.requestBody,dados.response)
+        router.get(dados.path, (req: Request, res: Response) => {
             callMethodClass(target,propertyKey,req,res);
         });
     };
 }
 
-export function Post(path: string){
+export function Post(dados: dadosRotas){
     return function(target: any, propertyKey: string){
-        router.post(path, (req: Request, res: Response) => {
+        createPathSwagger(dados.path,"post",dados.headers,dados.requestBody,dados.response)
+        router.post(dados.path, (req: Request, res: Response) => { 
             callMethodClass(target,propertyKey,req,res);
         })
     }
 }
 
-export function Delete(path: string){
+export function Delete(dados: dadosRotas){
     return function(target: any, propertyKey: string){
-        router.delete(path, (req: Request, res: Response) => {
+        createPathSwagger(dados.path,"delete",dados.headers,dados.requestBody,dados.response)    
+        router.delete(dados.path, (req: Request, res: Response) => {
             callMethodClass(target,propertyKey,req,res);
         })
     }
 }
 
-export function Put(path: string){
+export function Put(dados: dadosRotas){
     return function(target: any, propertyKey: string){
-        router.put(path, (req: Request, res: Response) => {
+        createPathSwagger(dados.path,"put",dados.headers,dados.requestBody,dados.response)
+        router.put(dados.path, (req: Request, res: Response) => {
             callMethodClass(target,propertyKey,req,res);
         })
     }

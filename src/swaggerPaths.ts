@@ -9,13 +9,27 @@ interface swaggerParameter {
     }
 }
 
+interface swaggerReponse {
+    description?: string,
+    schema?: {
+        $ref: string
+    }
+}
+
 export interface headerInterface{
     name: string,
-    required?: boolean
+    required?: boolean,
+    description: string
+}
+
+export interface responseInterface {
+    status: string,
+    description?: string,
+    classResponse: ()=>any
 }
 
 type method = "get"| "post" | "put" | "delete";
-export function createPathSwagger(path:string, metodoRequest: method,headers?: headerInterface[], body?: any, responses?: any[] ){
+export function createPathSwagger(path:string, metodoRequest: method,headers?: headerInterface[], body?: any, responses?: responseInterface[] ){
     if (!swaggerPaths[path]){
         swaggerPaths[path] = {}
     }
@@ -30,7 +44,19 @@ export function createPathSwagger(path:string, metodoRequest: method,headers?: h
     
 }
 
-function getResponse(_: any){
+function getResponse(responses?: responseInterface[]){
+    const responseObj:any = {}
+    if (responses){
+        responses.forEach(response=> {
+            
+            responseObj[response.status]={
+                description: response.description ?? response.classResponse.name,
+                schema: {
+                    $ref: `#/definitions/${response.classResponse.name}`
+                }
+            } as swaggerReponse
+        })
+    }
     
 }
 

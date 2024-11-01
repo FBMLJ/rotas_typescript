@@ -41,6 +41,8 @@ export function createPathSwagger(path:string, metodoRequest: method,headers?: h
         parameters: getParameter(headers, body),
         responses: getResponse(responses)
     }
+
+    console.log(swaggerPaths[path][metodoRequest])
     
 }
 

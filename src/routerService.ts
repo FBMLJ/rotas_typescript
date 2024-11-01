@@ -35,7 +35,7 @@ export function Get(dados: dadosRotas) {
 
 export function Post(dados: dadosRotas){
     return function(target: any, propertyKey: string){
-        console.log(target)
+        console.log(target.constructor.name)
         createPathSwagger(target,dados.path,"post",dados.headers,dados.requestBody,dados.response)
         router.post(dados.path, (req: Request, res: Response) => { 
             callMethodClass(target,propertyKey,req,res);

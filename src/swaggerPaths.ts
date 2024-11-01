@@ -39,7 +39,7 @@ export function createPathSwagger(target: any,path:string, metodoRequest: method
     swaggerPaths[path][metodoRequest] = {
         consumes: ["application/json"],
         produces: ["application/json"],
-        tags: [target.name],
+        tags: [target.constructor.name],
         parameters: getParameter(headers, body),
         responses: getResponse(responses)
     }

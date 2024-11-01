@@ -25,7 +25,7 @@ export interface headerInterface{
 export interface responseInterface {
     status: string,
     description?: string,
-    classResponse: ()=>any
+    classResponse: any
 }
 
 type method = "get"| "post" | "put" | "delete";

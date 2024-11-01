@@ -59,6 +59,7 @@ function getResponse(responses?: responseInterface[]){
             } as swaggerReponse
         })
     }
+    return responseObj;
     
 }
 

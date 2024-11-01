@@ -1,5 +1,5 @@
 const swaggerPaths:any= {}
-const tags:any = {}
+
 interface swaggerParameter {
     in: "body" | "header",
     name: string,

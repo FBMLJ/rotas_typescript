@@ -1,4 +1,5 @@
 const swaggerPaths:any= {}
+const tags:any = {}
 interface swaggerParameter {
     in: "body" | "header",
     name: string,
@@ -29,7 +30,7 @@ export interface responseInterface {
 }
 
 type method = "get"| "post" | "put" | "delete";
-export function createPathSwagger(path:string, metodoRequest: method,headers?: headerInterface[], body?: any, responses?: responseInterface[] ){
+export function createPathSwagger(target: any,path:string, metodoRequest: method,headers?: headerInterface[], body?: any, responses?: responseInterface[] ){
     if (!swaggerPaths[path]){
         swaggerPaths[path] = {}
     }
@@ -38,6 +39,7 @@ export function createPathSwagger(path:string, metodoRequest: method,headers?: h
     swaggerPaths[path][metodoRequest] = {
         consumes: ["application/json"],
         produces: ["application/json"],
+        tags: [target.name],
         parameters: getParameter(headers, body),
         responses: getResponse(responses)
     }

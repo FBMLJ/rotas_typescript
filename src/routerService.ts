@@ -26,7 +26,7 @@ const callMethodClass = (target: any, propertyKey: string, req: Request, res: Re
 
 export function Get(dados: dadosRotas) {
     return function(target: any, propertyKey: string) {  
-        createPathSwagger(dados.path,"get",dados.headers,dados.requestBody,dados.response)
+        createPathSwagger(target,dados.path,"get",dados.headers,dados.requestBody,dados.response)
         router.get(dados.path, (req: Request, res: Response) => {
             callMethodClass(target,propertyKey,req,res);
         });
@@ -35,7 +35,7 @@ export function Get(dados: dadosRotas) {
 
 export function Post(dados: dadosRotas){
     return function(target: any, propertyKey: string){
-        createPathSwagger(dados.path,"post",dados.headers,dados.requestBody,dados.response)
+        createPathSwagger(target,dados.path,"post",dados.headers,dados.requestBody,dados.response)
         router.post(dados.path, (req: Request, res: Response) => { 
             callMethodClass(target,propertyKey,req,res);
         })
@@ -44,7 +44,7 @@ export function Post(dados: dadosRotas){
 
 export function Delete(dados: dadosRotas){
     return function(target: any, propertyKey: string){
-        createPathSwagger(dados.path,"delete",dados.headers,dados.requestBody,dados.response)    
+        createPathSwagger(target,dados.path,"delete",dados.headers,dados.requestBody,dados.response)    
         router.delete(dados.path, (req: Request, res: Response) => {
             callMethodClass(target,propertyKey,req,res);
         })
@@ -53,7 +53,7 @@ export function Delete(dados: dadosRotas){
 
 export function Put(dados: dadosRotas){
     return function(target: any, propertyKey: string){
-        createPathSwagger(dados.path,"put",dados.headers,dados.requestBody,dados.response)
+        createPathSwagger(target,dados.path,"put",dados.headers,dados.requestBody,dados.response)
         router.put(dados.path, (req: Request, res: Response) => {
             callMethodClass(target,propertyKey,req,res);
         })
